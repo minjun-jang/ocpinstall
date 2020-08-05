@@ -1,0 +1,23 @@
+[00. Subscription Manager Register]============================================
+@@@ Subscription Register
+$ subscription-manager register
+$ subscription-manager list --available --matches '*OpenShift*'
+$ subscription-manager attach --pool=<pool-id>
+$ subscription-manager repos --disable="*"
+$ subscription-manager repos \
+--enable="rhel-7-server-rpms" \
+--enable="rhel-7-server-extras-rpms" \
+--enable="rhel-7-server-ose-4.5-rpms"
+$ yum -y update
+$ yum clean all; yum repolist
+
+
+
+[01. Download RPMS & Local Reposytory]============================================
+@@@ Create Reposytory RPMS
+$ yum -y install yum-utils createrepo git
+$ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+$ /root/.openshift/v4.5/99.download/repo_sync.sh
+
+@@@ Package split zip/unzip
+$ /root/.openshift/v4.5/99.download/repo_tar.sh

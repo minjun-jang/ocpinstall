@@ -1,0 +1,25 @@
+$TTL 1D
+@   IN SOA   @ ns.cloud.com. (
+             179332     ; serial
+             3H         ; refresh
+             1H         ; retry
+             1W         ; expire
+             1H )       ; minimum
+@            IN NS      ns. 
+
+; Bastion or Jumphost
+60		IN PTR	ns.
+60		IN PTR	bastion.ocp4.cloud.com.
+60		IN PTR	ext-registry.ocp4.cloud.com.
+
+; OCP Cluster
+68		IN PTR	bootstrap.ocp4.cloud.com.
+61		IN PTR	master1.ocp4.cloud.com.
+62		IN PTR	master2.ocp4.cloud.com.
+63		IN PTR	master3.ocp4.cloud.com.
+64		IN PTR	infra1.ocp4.cloud.com.
+65		IN PTR	infra2.ocp4.cloud.com.
+66		IN PTR	worker1.ocp4.cloud.com.
+67		IN PTR	worker2.ocp4.cloud.com.
+60		IN PTR	api.ocp4.cloud.com.
+60		IN PTR	api-int.ocp4.cloud.com.

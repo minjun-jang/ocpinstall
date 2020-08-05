@@ -1,0 +1,38 @@
+$TTL 1D
+@   IN SOA   @ ns.cloud.com. (
+             1019951001 ; serial
+             3H         ; refresh
+             1H         ; retry
+             1W         ; expire
+             1H )       ; minimum
+@            IN NS      ns.cloud.com.
+@            IN A       192.168.35.60
+
+; Ancillary services
+lb.ocp4			IN A		192.168.35.60
+ext-lb.ocp4		IN A		192.168.35.60
+
+; Bastion or Jumphost
+bastion.ocp4		IN A		192.168.35.60
+ext-registry.ocp4	IN A		192.168.35.60
+ns			IN A		192.168.35.60
+
+; OCP Cluster
+bootstrap.ocp4		IN A		192.168.35.68
+master1.ocp4		IN A		192.168.35.61
+master2.ocp4		IN A		192.168.35.62
+master3.ocp4		IN A		192.168.35.63
+infra1.ocp4		IN A		192.168.35.64
+infra2.ocp4		IN A		192.168.35.65
+worker1.ocp4		IN A		192.168.35.66
+worker2.ocp4		IN A		192.168.35.67
+
+_etcd-server-ssl._tcp.ocp4.cloud.com.	IN SRV  0   0   2380    etcd-0.ocp4.cloud.com.
+                                     	IN SRV  0   0   2380    etcd-1.ocp4.cloud.com.
+                                       	IN SRV  0   0   2380    etcd-2.ocp4.cloud.com.
+
+api.ocp4		IN A		192.168.35.60
+api-int.ocp4		IN A		192.168.35.60
+
+apps.ocp4		IN A		192.168.35.60
+*.apps.ocp4		IN A		192.168.35.60

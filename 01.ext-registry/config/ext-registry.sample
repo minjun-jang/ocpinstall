@@ -1,0 +1,38 @@
+#
+# Copy (chmod 664) to /etc/systemd/system/###REGISTRY_NAME###.service
+#
+# systemctl daemon-reload
+# systemctl start ###REGISTRY_NAME###
+# systemctl status ###REGISTRY_NAME###
+# systemctl enable ###REGISTRY_NAME###
+#
+
+[Unit]
+Description=OpenShift Container Registry
+After=network.target syslog.target
+
+[Service]
+Type=simple
+TimeoutStartSec=5m
+ExecStartPre=-/usr/bin/podman rm "###REGISTRY_NAME###"
+
+ExecStart=/usr/bin/podman run   --name ###REGISTRY_NAME### -p ###REGISTRY_PORT###:5000 \
+                                -v /opt/registry/data:/var/lib/registry:z \
+                                -v /opt/registry/auth:/auth:z \
+                                -e "REGISTRY_AUTH=htpasswd" \
+                                -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry" \
+                                -e "REGISTRY_HTTP_SECRET=ALongRandomSecretForRegistry" \
+                                -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+                                -v /opt/registry/certs:/certs:z \
+                                -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+                                -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+                                docker.io/library/registry:2
+
+ExecReload=-/usr/bin/podman stop "###REGISTRY_NAME###"
+ExecReload=-/usr/bin/podman rm "###REGISTRY_NAME###"
+ExecStop=-/usr/bin/podman stop "###REGISTRY_NAME###"
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

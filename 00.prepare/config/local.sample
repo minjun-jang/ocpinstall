@@ -1,0 +1,17 @@
+[rhel-7-server-rpms]
+name=Red Hat Enterprise Linux 7 Server
+baseurl=file://###LOCAL_REPO_PATH###/repos/rhel-7-server-rpms/
+gpgcheck=0
+enabled=1
+
+[rhel-7-server-extras-rpms]
+name=Red Hat Enterprise Linux 7 Server - Extras
+baseurl=file://###LOCAL_REPO_PATH###/repos/rhel-7-server-extras-rpms/
+gpgcheck=0
+enabled=1
+
+[rhel-7-server-ose-4.5-rpms]
+name=Red Hat OpenShift Container Platform 4.5
+baseurl=file://###LOCAL_REPO_PATH###/repos/rhel-7-server-ose-4.5-rpms/
+gpgcheck=0
+enabled=1

@@ -1,0 +1,33 @@
+apiVersion: v1
+baseDomain: ###BASE_DOMAIN###
+compute:
+- hyperthreading: Enabled   
+  name: worker
+  replicas: 0 
+controlPlane:
+  hyperthreading: Enabled   
+  name: master 
+  replicas: 3
+metadata:
+  name: ###CLUSTER_NAME###
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14 
+    hostPrefix: 23 
+  networkType: OpenShiftSDN
+  serviceNetwork: 
+  - 172.30.0.0/16
+platform:
+  none: {} 
+fips: false
+pullSecret: '###PULL_SECRET###'
+sshKey: '###SSH_PUB###'
+additionalTrustBundle: |
+###EXT_REGISTRY_CERT###
+imageContentSources:
+- mirrors:
+  - ###REGISTRY_URL###:###REGISTRY_PORT###/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - ###REGISTRY_URL###:###REGISTRY_PORT###/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev

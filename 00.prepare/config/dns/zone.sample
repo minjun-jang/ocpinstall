@@ -1,0 +1,30 @@
+$TTL 1D
+@   IN SOA   @ ns.###BASE_DOMAIN###. (
+             1019951001 ; serial
+             3H         ; refresh
+             1H         ; retry
+             1W         ; expire
+             1H )       ; minimum
+@            IN NS      ns.###BASE_DOMAIN###.
+@            IN A       ###BASTION_IP###
+
+; Ancillary services
+lb.###CLUSTER_NAME###			IN A		###BASTION_IP###
+ext-lb.###CLUSTER_NAME###		IN A		###BASTION_IP###
+
+; Bastion or Jumphost
+bastion.###CLUSTER_NAME###		IN A		###BASTION_IP###
+ext-registry.###CLUSTER_NAME###	IN A		###BASTION_IP###
+ns			IN A		###BASTION_IP###
+
+; OCP Cluster
+;;;NODES;;;
+_etcd-server-ssl._tcp.###DNS_DOMAIN###.	IN SRV  0   0   2380    etcd-0.###DNS_DOMAIN###.
+                                     	IN SRV  0   0   2380    etcd-1.###DNS_DOMAIN###.
+                                       	IN SRV  0   0   2380    etcd-2.###DNS_DOMAIN###.
+
+api.###CLUSTER_NAME###		IN A		###BASTION_IP###
+api-int.###CLUSTER_NAME###		IN A		###BASTION_IP###
+
+apps.###CLUSTER_NAME###		IN A		###BASTION_IP###
+*.apps.###CLUSTER_NAME###		IN A		###BASTION_IP###

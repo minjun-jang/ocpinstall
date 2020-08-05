@@ -1,0 +1,17 @@
+$TTL 1D
+@   IN SOA   @ ns.###BASE_DOMAIN###. (
+             179332     ; serial
+             3H         ; refresh
+             1H         ; retry
+             1W         ; expire
+             1H )       ; minimum
+@            IN NS      ns. 
+
+; Bastion or Jumphost
+###BASTION_IP###		IN PTR	ns.
+###BASTION_IP###		IN PTR	bastion.###DNS_DOMAIN###.
+###BASTION_IP###		IN PTR	ext-registry.###DNS_DOMAIN###.
+
+; OCP Cluster
+;;;NODES;;;###DNS_REVERSE_API###		IN PTR	api.###DNS_DOMAIN###.
+###DNS_REVERSE_API###		IN PTR	api-int.###DNS_DOMAIN###.

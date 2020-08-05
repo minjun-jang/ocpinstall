@@ -1,0 +1,64 @@
+apiVersion: v1
+baseDomain: ###BASE_DOMAIN###
+compute:
+- hyperthreading: Enabled   
+  name: worker
+  replicas: 0 
+controlPlane:
+  hyperthreading: Enabled   
+  name: master 
+  replicas: 3
+metadata:
+  name: ###CLUSTER_NAME###
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14 
+    hostPrefix: 23 
+  networkType: OpenShiftSDN
+  serviceNetwork: 
+  - 172.30.0.0/16
+platform:
+  none: {} 
+fips: false
+pullSecret: '###PULL_SECRET###'
+sshKey: '###SSH_PUB###'
+additionalTrustBundle: |
+  -----BEGIN CERTIFICATE-----
+  MIIFmTCCA4GgAwIBAgIJAMrPYsQMPk4rMA0GCSqGSIb3DQEBCwUAMGMxCzAJBgNV
+  BAYTAktSMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQg
+  Q29tcGFueSBMdGQxHzAdBgNVBAMMFmJhc3Rpb24ub2NwNC5jbG91ZC5jb20wHhcN
+  MjAwNzI4MDg1MTA0WhcNMzAwNzI2MDg1MTA0WjBjMQswCQYDVQQGEwJLUjEVMBMG
+  A1UEBwwMRGVmYXVsdCBDaXR5MRwwGgYDVQQKDBNEZWZhdWx0IENvbXBhbnkgTHRk
+  MR8wHQYDVQQDDBZiYXN0aW9uLm9jcDQuY2xvdWQuY29tMIICIjANBgkqhkiG9w0B
+  AQEFAAOCAg8AMIICCgKCAgEAqckobXzxspnRDr4ZiLCOCi0rFnfI9mdVi3HXYAuN
+  pvHrLlMAazgc7X8stQseLpogo6S3psabodnKFKfbNwt1K+NChW4HYoV0Ocp2/sw0
+  yPgOAj2R0Y5HqyokDEQtYnUhk8g3+vJXrL+Co8uprCJ3/4FQ/TGeNgqN4hCBkVQQ
+  BAONPisXrszEY+sW2d8+bkCC+qd9elsiZgA86Zwi2ZrPNew+/Ea2kUFbC9OYzolP
+  /+0IC7EsMIyvrKlJje6sGPB1SrB/zD9JZIUich6pEjytBCNITGmj+jDAtbaQSayE
+  Vqz2IZ7tHJ1e+/WAwpZuzA2R8pjjry3IKLESw7k+7qPryjpZfIcii51S+qYQbplU
+  7vnnNYomP5DwU9BtdxxCfSs3E8N5l7PzNFlfooi7BkSFvB6HWyG/tIGqsQInHIk6
+  yHN6IwfQ0J6NzAe/T8wHP66MwTIvI/o+N9ehKz2RxR2nFv8mbd9hQ6esxE2mefVT
+  HHh60w+0Fm5kDne56f0utg58DRueJX7qa6OT48tdXQxZtt9mxvd6imyM5ETrPCl1
+  tMuU7T2sl9Gste3Lc2O8hOQGBYzppR9n91WCiNeUIPmrzVaswBGjCkTWgz/Uvvh1
+  gmlJmqc++MgSPvEaZekJy141UAa2V5WNfFy1xfKE/38IhqRUIQ/+0MYgrvagmPGu
+  2AcCAwEAAaNQME4wHQYDVR0OBBYEFBNWExfuAxxC94xH0rxdp2H+N9sCMB8GA1Ud
+  IwQYMBaAFBNWExfuAxxC94xH0rxdp2H+N9sCMAwGA1UdEwQFMAMBAf8wDQYJKoZI
+  hvcNAQELBQADggIBAHORqHJ9BXeoGgP/7aIcLKDHKJwyBTetIWeoLxAb6cB5R1+v
+  XKEvGUbSr/N5ANqfPNjgSuAp5FzAANoDLcxyhVT4A3JVEKNWCyKZIUpxrBdEmUUo
+  7rv/32nWH27x4wFe7DuRPT0GNE1iZDrWjPBXmWF2iJjqtQexu8GsEKj8ndFx6TiP
+  TwBfvuqLtQoN8X8elGznZ8KEJ1vMDp9J0/7nCrp0gAhzNHaJCBg3dl2SQ0um7bdy
+  qzsOTykFJSbj6H+2J1m/N/LcEFCg3fLUtY6SFQb/nKOKDvv7KnlzDqD3Oi7eYfoR
+  G/cfDQ+ElgGbvqFsGe/axDEhJQjFHzrS041wjYVMBY7o1Iz2hyF9Cr/3zGiSDyvP
+  /yMdlwRmhxODQQw2lkeuil54H8j/k+aa4HDGd1B6oSNzQkOXJPQUKHtGhgwpKb+1
+  kVE85AGqLM1B2M7H/X6OEa1q+udX4JpdYOWt7Opy+T9D0Gy62Fe1zi3YNk+PKuED
+  btsltYxnTbCzbBGFZnPTnttK4N6QiLvlFGl8EfL7k3VWs0KdwbjAKKCsoTFhw3sW
+  m85BXJVaSnKc79eD399VkKWxyUdQsEYfCo7ufzfWn694p/mU/e/yQVVGik9/Nl9O
+  SnsJGth+wDJNa7WJiNCaXhbcRYI7moM/zP+OPLBhEB738uH31WmDZYR2HbbC
+  -----END CERTIFICATE-----
+imageContentSources:
+- mirrors:
+  - ###REGISTRY_URL###:###REGISTRY_PORT###/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-release
+- mirrors:
+  - ###REGISTRY_URL###:###REGISTRY_PORT###/ocp4/openshift4
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
